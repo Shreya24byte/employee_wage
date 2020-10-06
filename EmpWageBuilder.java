@@ -26,6 +26,7 @@ class CompanyEmpWage {
 	public void setTotalEmpWage(int totalWage) {
 		this.totalWage = totalWage;
 	}
+
 	public String toString() {
 		return "Total employee wage for " +company+ " is " +totalWage;
 	}
@@ -40,14 +41,18 @@ public class EmpWageBuilder implements IemployeeWageComputation {
 		private int numOfCompany = 0;
 		//ArrayList
 		private ArrayList<CompanyEmpWage> companyEmpWageList;
+		//Hash Map
+		private Map<String,CompanyEmpWage> companyEmpWageMap;
 		
 		public EmpWageBuilder() {
 			companyEmpWageList = new ArrayList<>();
+			companyEmpWageMap = new HashMap<>();
 		}
 		
 		public void addCompanyEmpWage(String company,int wage_per_hour,int max_working_days,int max_working_hours ) {
 			CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, wage_per_hour, max_working_days, max_working_hours);
 			companyEmpWageList.add(companyEmpWage);
+			companyEmpWageMap.put(company, companyEmpWage);
 		}
 		
 		public void employeeWageComputation() {
@@ -99,8 +104,8 @@ public class EmpWageBuilder implements IemployeeWageComputation {
 			System.out.println("Welcome to employee wage computation problem");
 			
 			IemployeeWageComputation empWageBuilder = new EmpWageBuilder();
-			empWageBuilder.addCompanyEmpWage("Reliance", 20, 20, 100);
-			empWageBuilder.addCompanyEmpWage("Idea", 10, 20, 100);
+			empWageBuilder.addCompanyEmpWage("Reliance", 20, 20, 50);
+			empWageBuilder.addCompanyEmpWage("Idea", 10, 20, 50);
 			empWageBuilder.employeeWageComputation();
 		}	
 }
