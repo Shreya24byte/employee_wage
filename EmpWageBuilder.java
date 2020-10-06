@@ -1,14 +1,12 @@
 public class EmpWageBuilder {
-	
-
-	public static void main (String args[]) {
-		System.out.println("Welcome to employee wage computation problem");
-		//Constants
-		final int FULL_TIME = 1;
-		final int PART_TIME = 2;
-		final int WAGE_PER_HOUR = 20;
-		final int MAX_WORKING_DAYS = 20;
-		final int MAX_WORKING_HOURS = 100;
+	//Constants
+	public static final int FULL_TIME = 1;
+	public static final int PART_TIME = 2;
+	public static final int WAGE_PER_HOUR = 20;
+	public static final int MAX_WORKING_DAYS = 20;
+	public static final int MAX_WORKING_HOURS = 100; 
+		
+	public static int EmployeeWageComputation() {
 				
 		//Variables
 		int workHours = 0;
@@ -24,7 +22,7 @@ public class EmpWageBuilder {
 			//Attendance check
 			switch(employeeCheck) {
 			case FULL_TIME:
-				workHours = 8;
+				workHours = 8;				
 				break;
 			case PART_TIME:
 				workHours = 4;
@@ -41,5 +39,11 @@ public class EmpWageBuilder {
 		System.out.println("Day " +totalWorkingDays+ " employee work hours " +workHours+ " and daily wage is " +dailyWage);
 		}
 		System.out.println("Employee monthly wage is " +totalWorkingHours * WAGE_PER_HOUR);
+		return totalWorkingHours * WAGE_PER_HOUR;
+	}	
+
+	public static void main (String args[]) {
+		System.out.println("Welcome to employee wage computation problem");
+		EmployeeWageComputation();
 	}
 }
