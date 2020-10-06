@@ -1,3 +1,4 @@
+import java.util.*;
 
 //Interface
 interface IemployeeWageComputation {
@@ -37,22 +38,23 @@ public class EmpWageBuilder implements IemployeeWageComputation {
 		public static final int PART_TIME = 2;
 		
 		private int numOfCompany = 0;
-		//Array
-		private CompanyEmpWage[] companyEmpWageArray;
+		//ArrayList
+		private ArrayList<CompanyEmpWage> companyEmpWageList;
 		
 		public EmpWageBuilder() {
-			companyEmpWageArray = new CompanyEmpWage[5];
+			companyEmpWageList = new ArrayList<>();
 		}
 		
 		public void addCompanyEmpWage(String company,int wage_per_hour,int max_working_days,int max_working_hours ) {
-			companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, wage_per_hour, max_working_days, max_working_hours );
-			numOfCompany++;
+			CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, wage_per_hour, max_working_days, max_working_hours);
+			companyEmpWageList.add(companyEmpWage);
 		}
 		
 		public void employeeWageComputation() {
-			for (int i=0; i<numOfCompany; i++) {
-				companyEmpWageArray[i].setTotalEmpWage(this.employeeWageComputation(companyEmpWageArray[i]));
-				System.out.println(companyEmpWageArray[i]);
+			for (int i=0; i<companyEmpWageList.size(); i++) {
+				CompanyEmpWage companyEmpWage = companyEmpWageList.get(i);
+				companyEmpWage.setTotalEmpWage(this.employeeWageComputation(companyEmpWage));
+				System.out.println(companyEmpWage);
 			}
 		}
 		
@@ -65,7 +67,7 @@ public class EmpWageBuilder implements IemployeeWageComputation {
 				int totalWorkingDays = 0;
 				
 				//computation
-				while(totalWorkingDays <companyEmpWage.max_working_days && totalWorkingHours < companyEmpWage.max_working_hours) {
+				while(totalWorkingDays < companyEmpWage.max_working_days && totalWorkingHours < companyEmpWage.max_working_hours) {
 					totalWorkingDays++;
 					
 					int employeeCheck = (int) (Math.floor(Math.random()*10)%3);
