@@ -1,4 +1,10 @@
-package AssignmentProbs;
+
+//Interface
+interface IemployeeWageComputation {
+	public void addCompanyEmpWage(String company,int wage_per_hour,int max_working_days,int max_working_hours );
+	public void employeeWageComputation();
+	
+}
 
 class CompanyEmpWage {
 	//Constants
@@ -24,7 +30,7 @@ class CompanyEmpWage {
 	}
 }
 
-public class EmpWageBuilder {
+public class EmpWageBuilder implements IemployeeWageComputation {
 	
 		//Constants
 		public static final int FULL_TIME = 1;
@@ -38,12 +44,12 @@ public class EmpWageBuilder {
 			companyEmpWageArray = new CompanyEmpWage[5];
 		}
 		
-		private void addCompanyEmpWage(String company,int wage_per_hour,int max_working_days,int max_working_hours ) {
+		public void addCompanyEmpWage(String company,int wage_per_hour,int max_working_days,int max_working_hours ) {
 			companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, wage_per_hour, max_working_days, max_working_hours );
 			numOfCompany++;
 		}
 		
-		private void employeeWageComputation() {
+		public void employeeWageComputation() {
 			for (int i=0; i<numOfCompany; i++) {
 				companyEmpWageArray[i].setTotalEmpWage(this.employeeWageComputation(companyEmpWageArray[i]));
 				System.out.println(companyEmpWageArray[i]);
@@ -51,7 +57,7 @@ public class EmpWageBuilder {
 		}
 		
 		
-		private int employeeWageComputation(CompanyEmpWage companyEmpWage) {
+		public int employeeWageComputation(CompanyEmpWage companyEmpWage) {
 				//Variables
 				int workHours = 0;
 				int dailyWage = 0;
@@ -90,9 +96,9 @@ public class EmpWageBuilder {
 		public static void main (String args[]) {
 			System.out.println("Welcome to employee wage computation problem");
 			
-			EmpWageBuilder empWageBuilder = new EmpWageBuilder();
+			IemployeeWageComputation empWageBuilder = new EmpWageBuilder();
 			empWageBuilder.addCompanyEmpWage("Reliance", 20, 20, 100);
-			empWageBuilder.addCompanyEmpWage("Idea", 10, 20, 150);
+			empWageBuilder.addCompanyEmpWage("Idea", 10, 20, 100);
 			empWageBuilder.employeeWageComputation();
 		}	
 }
