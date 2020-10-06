@@ -4,7 +4,7 @@ import java.util.*;
 interface IemployeeWageComputation {
 	public void addCompanyEmpWage(String company,int wage_per_hour,int max_working_days,int max_working_hours );
 	public void employeeWageComputation();
-	
+	public int getTotalWage(String company);
 }
 
 class CompanyEmpWage {
@@ -21,6 +21,7 @@ class CompanyEmpWage {
 		this.wage_per_hour = wage_per_hour;
 		this.max_working_days = max_working_days;
 		this.max_working_hours = max_working_days;
+		totalWage = 0;
 	}
 	
 	public void setTotalEmpWage(int totalWage) {
@@ -63,7 +64,11 @@ public class EmpWageBuilder implements IemployeeWageComputation {
 			}
 		}
 		
-		
+		//Get method
+		public int getTotalWage(String company) {
+			return companyEmpWageMap.get(company).totalWage;			
+	}
+				
 		public int employeeWageComputation(CompanyEmpWage companyEmpWage) {
 				//Variables
 				int workHours = 0;
@@ -107,5 +112,7 @@ public class EmpWageBuilder implements IemployeeWageComputation {
 			empWageBuilder.addCompanyEmpWage("Reliance", 20, 20, 50);
 			empWageBuilder.addCompanyEmpWage("Idea", 10, 20, 50);
 			empWageBuilder.employeeWageComputation();
+			
+			System.out.println("Total employee wage for Reliance company " +empWageBuilder.getTotalWage("Reliance"));
 		}	
 }
